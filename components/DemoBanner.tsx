@@ -34,7 +34,7 @@ export function DemoBanner({
               обновляется каждые 5 минут. Сделки и мультипликаторы
               по секторам — справочные (обновляются вручную).
             </p>
-            <p className="text-emerald-700 text-xs">
+            <p className="text-emerald-700 text-xs" suppressHydrationWarning>
               Последний фетч:{" "}
               {new Date(fetchedAt).toLocaleString("ru-RU", {
                 day: "2-digit",
@@ -75,7 +75,7 @@ export function DemoBanner({
             </a>{" "}
             и RSS-лент Коммерсанта, Ведомостей, Интерфакса, РБК, Forbes.
           </p>
-          <p className="text-amber-700 text-xs">
+          <p className="text-amber-700 text-xs" suppressHydrationWarning>
             Последняя проверка:{" "}
             {new Date(fetchedAt).toLocaleString("ru-RU", {
               day: "2-digit",

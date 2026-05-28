@@ -1,7 +1,7 @@
 import { ExternalLink } from "lucide-react";
 import { NewsItem as NewsItemType } from "@/lib/types";
-import { relativeTime } from "@/lib/format";
 import { getSectorById } from "@/lib/sectors";
+import { RelativeTime } from "./RelativeTime";
 
 const IMPORTANCE_STYLE: Record<NewsItemType["importance"], string> = {
   high: "border-rose-200 bg-rose-50 text-rose-700",
@@ -46,7 +46,7 @@ export function NewsItemView({
           ) : null,
         )}
         <span className="ml-auto text-ink-500">
-          {relativeTime(item.publishedAt)}
+          <RelativeTime iso={item.publishedAt} />
         </span>
       </div>
 
