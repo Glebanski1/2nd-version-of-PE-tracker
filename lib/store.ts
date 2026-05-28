@@ -1,7 +1,8 @@
 import { DEALS, getDealsBySector, getRecentDeals } from "./deals";
 import { MULTIPLIERS, getMultipliersBySector } from "./multipliers";
-import { NEWS, getLatestNews, getNewsBySector } from "./news";
+import { NEWS } from "./news";
 import { SECTORS, getSectorById } from "./sectors";
+import { getAggregated, getLiveSince } from "./aggregator";
 import {
   Deal,
   MarketOverview,
@@ -9,74 +10,38 @@ import {
   SectorSnapshot,
 } from "./types";
 
-type LiveEvent =
-  | { kind: "news"; payload: NewsItem }
-  | { kind: "deal"; payload: Deal }
-  | { kind: "heartbeat"; payload: { at: string } };
+export async function getLatestNews(limit = 12): Promise<NewsItem[]> {
+  const { items } = await getAggregated();
+  return items.slice(0, limit);
+}
 
-const LIVE_BUFFER: LiveEvent[] = [];
+export async function getNewsBySector(
+  sectorId: string,
+  limit?: number,
+): Promise<NewsItem[]> {
+  const { items } = await getAggregated();
+  const filtered = items.filter((n) =>
+    n.sectorIds.includes(sectorId as any),
+  );
+  return typeof limit === "number" ? filtered.slice(0, limit) : filtered;
+}
 
-const SAMPLE_LIVE_NEWS: NewsItem[] = [
-  {
-    id: "n-live-001",
-    publishedAt: new Date().toISOString(),
-    title: "@dealsma: Ozon обсуждает выкуп оставшейся доли в Ozon Fintech",
-    summary:
-      "По данным источников, маркетплейс ведёт переговоры о консолидации 100% финтех-направления. Оценка обсуждается в диапазоне 45–55 млрд руб.",
-    sectorIds: ["it", "finance"],
-    source: "@dealsma",
-    sourceUrl: "https://t.me/dealsma",
-    channel: "Telegram · DealsMA",
-    importance: "high",
-    tags: ["Ozon", "Финтех", "M&A"],
-  },
-  {
-    id: "n-live-002",
-    publishedAt: new Date().toISOString(),
-    title: "Газпромбанк Инвестиции: понизили целевую оценку Магнита на 8%",
-    summary:
-      "Аналитики связывают коррекцию с падением LfL-трафика и ростом затрат на логистику. Новый таргет — 7 850 руб. за акцию.",
-    sectorIds: ["retail"],
-    source: "Газпромбанк Инвестиции",
-    sourceUrl: "https://gazprombank.investments/",
-    channel: "ГПБ Инвестиции",
-    importance: "medium",
-    tags: ["Магнит", "Equity Research"],
-  },
-  {
-    id: "n-live-003",
-    publishedAt: new Date().toISOString(),
-    title: "@dealsma: фонд Da Vinci Capital ведёт переговоры о выходе из Cian",
-    summary:
-      "Размер пакета — около 12%. Среди потенциальных покупателей — стратегические игроки в недвижимости и крупные ПИФы.",
-    sectorIds: ["realestate", "it"],
-    source: "@dealsma",
-    sourceUrl: "https://t.me/dealsma",
-    channel: "Telegram · DealsMA",
-    importance: "high",
-    tags: ["Da Vinci Capital", "Cian", "PE exit"],
-  },
-];
+export async function getDataSourceStatus(): Promise<{
+  isReal: boolean;
+  fetchedAt: number;
+  sourcesOk: number;
+  sourcesTotal: number;
+}> {
+  const { isReal, fetchedAt, sourcesOk, sourcesTotal } = await getAggregated();
+  return { isReal, fetchedAt, sourcesOk, sourcesTotal };
+}
 
-let liveCursor = 0;
-
-export function pollLiveUpdates(sinceMs: number): {
+export async function pollLiveUpdatesReal(sinceMs: number): Promise<{
   asOf: string;
   events: NewsItem[];
-} {
-  const now = Date.now();
-  const shouldEmit = now - sinceMs > 8_000 && Math.random() > 0.45;
-  const events: NewsItem[] = [];
-  if (shouldEmit) {
-    const tmpl = SAMPLE_LIVE_NEWS[liveCursor % SAMPLE_LIVE_NEWS.length];
-    liveCursor += 1;
-    events.push({
-      ...tmpl,
-      id: `${tmpl.id}-${now}`,
-      publishedAt: new Date(now).toISOString(),
-    });
-  }
-  return { asOf: new Date(now).toISOString(), events };
+}> {
+  const events = await getLiveSince(sinceMs);
+  return { asOf: new Date().toISOString(), events };
 }
 
 export function getMarketOverview(): MarketOverview {
@@ -109,14 +74,16 @@ export function getMarketOverview(): MarketOverview {
   };
 }
 
-export function getSectorSnapshot(sectorId: string): SectorSnapshot | null {
+export async function getSectorSnapshot(
+  sectorId: string,
+): Promise<SectorSnapshot | null> {
   const sector = getSectorById(sectorId);
   if (!sector) return null;
   return {
     sector,
     multipliers: getMultipliersBySector(sectorId),
     deals: getDealsBySector(sectorId),
-    news: getNewsBySector(sectorId),
+    news: await getNewsBySector(sectorId),
   };
 }
 
@@ -128,7 +95,5 @@ export {
   getDealsBySector,
   getRecentDeals,
   getMultipliersBySector,
-  getNewsBySector,
-  getLatestNews,
   getSectorById,
 };

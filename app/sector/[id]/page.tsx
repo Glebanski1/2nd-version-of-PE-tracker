@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowLeft, Briefcase, Layers, Newspaper, TrendingUp } from "lucide-react";
 import { notFound } from "next/navigation";
-import { getSectorSnapshot, SECTORS } from "@/lib/store";
+import { getDataSourceStatus, getSectorSnapshot, SECTORS } from "@/lib/store";
 import { SectorIcon } from "@/components/SectorIcon";
 import { StatCard } from "@/components/StatCard";
 import { MultiplierTable } from "@/components/MultiplierTable";
@@ -18,8 +18,15 @@ export async function generateStaticParams() {
   return SECTORS.map((s) => ({ id: s.id }));
 }
 
-export default function SectorPage({ params }: { params: { id: string } }) {
-  const snapshot = getSectorSnapshot(params.id);
+export default async function SectorPage({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const [snapshot, status] = await Promise.all([
+    getSectorSnapshot(params.id),
+    getDataSourceStatus(),
+  ]);
   if (!snapshot) return notFound();
   const { sector, multipliers, deals, news } = snapshot;
 
@@ -36,7 +43,12 @@ export default function SectorPage({ params }: { params: { id: string } }) {
       </Link>
 
       <div className="mt-4">
-        <DemoBanner />
+        <DemoBanner
+          isReal={status.isReal}
+          sourcesOk={status.sourcesOk}
+          sourcesTotal={status.sourcesTotal}
+          fetchedAt={status.fetchedAt}
+        />
       </div>
 
       <section

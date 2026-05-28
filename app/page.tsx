@@ -7,6 +7,7 @@ import {
   TrendingUp,
 } from "lucide-react";
 import {
+  getDataSourceStatus,
   getLatestNews,
   getMarketOverview,
   getRecentDeals,
@@ -24,16 +25,24 @@ import { formatPct, formatRub } from "@/lib/format";
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-export default function HomePage() {
+export default async function HomePage() {
   const overview = getMarketOverview();
   const recentDeals = getRecentDeals(6);
-  const latestNews = getLatestNews(8);
+  const [latestNews, status] = await Promise.all([
+    getLatestNews(8),
+    getDataSourceStatus(),
+  ]);
   const topVolume = getSectorById(overview.topSectorByVolume);
   const topCount = getSectorById(overview.topSectorByCount);
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-      <DemoBanner />
+      <DemoBanner
+        isReal={status.isReal}
+        sourcesOk={status.sourcesOk}
+        sourcesTotal={status.sourcesTotal}
+        fetchedAt={status.fetchedAt}
+      />
       <section className="mt-6 rounded-2xl bg-gradient-to-br from-brand-700 via-brand-600 to-brand-500 p-6 text-white shadow-soft sm:p-8">
         <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-brand-100">
           <Sparkles className="h-4 w-4" />

@@ -7,7 +7,7 @@ export async function GET(
   _req: NextRequest,
   { params }: { params: { id: string } },
 ) {
-  const snapshot = getSectorSnapshot(params.id);
+  const snapshot = await getSectorSnapshot(params.id);
   if (!snapshot) {
     return NextResponse.json({ error: "Sector not found" }, { status: 404 });
   }

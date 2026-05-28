@@ -1,16 +1,24 @@
 import { NewsFilter } from "@/components/NewsFilter";
 import { DemoBanner } from "@/components/DemoBanner";
-import { getLatestNews, SECTORS } from "@/lib/store";
+import { getDataSourceStatus, getLatestNews, SECTORS } from "@/lib/store";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-export default function NewsPage() {
-  const all = getLatestNews(40);
+export default async function NewsPage() {
+  const [all, status] = await Promise.all([
+    getLatestNews(60),
+    getDataSourceStatus(),
+  ]);
   return (
     <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
       <div className="mb-4">
-        <DemoBanner />
+        <DemoBanner
+          isReal={status.isReal}
+          sourcesOk={status.sourcesOk}
+          sourcesTotal={status.sourcesTotal}
+          fetchedAt={status.fetchedAt}
+        />
       </div>
       <div className="mb-2">
         <h1 className="text-2xl font-semibold text-ink-900">Новости рынка</h1>
