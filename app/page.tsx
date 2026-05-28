@@ -18,6 +18,7 @@ import { SectorCard } from "@/components/SectorCard";
 import { DealCard } from "@/components/DealCard";
 import { LiveFeed } from "@/components/LiveFeed";
 import { VolumeChart } from "@/components/VolumeChart";
+import { DemoBanner } from "@/components/DemoBanner";
 import { formatPct, formatRub } from "@/lib/format";
 
 export const dynamic = "force-dynamic";
@@ -32,7 +33,8 @@ export default function HomePage() {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-      <section className="rounded-2xl bg-gradient-to-br from-brand-700 via-brand-600 to-brand-500 p-6 text-white shadow-soft sm:p-8">
+      <DemoBanner />
+      <section className="mt-6 rounded-2xl bg-gradient-to-br from-brand-700 via-brand-600 to-brand-500 p-6 text-white shadow-soft sm:p-8">
         <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-brand-100">
           <Sparkles className="h-4 w-4" />
           Russia PE / M&A · Live dashboard

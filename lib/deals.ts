@@ -15,7 +15,7 @@ export const DEALS: Deal[] = [
     description:
       "Закрытый ПИФ выкупает 11% Selectel у действующих акционеров с премией к последней оценке. Сделка предполагает оценку компании в 134 млрд руб.",
     sourceTitle: "Selectel получит нового якорного инвестора",
-    sourceUrl: "https://www.kommersant.ru/doc/selectel-2026",
+    sourceUrl: "https://www.kommersant.ru/rubric/4",
     sourceOutlet: "Коммерсантъ",
   },
   {
@@ -32,7 +32,7 @@ export const DEALS: Deal[] = [
     description:
       "В рамках допэмиссии PE-фонд Эльбрус Капитал получает блокирующий пакет, финансируя реструктуризацию долговой нагрузки и редизайн сети.",
     sourceTitle: "Эльбрус Капитал закрыл инвестицию в М.Видео",
-    sourceUrl: "https://www.vedomosti.ru/business/articles/mvideo-elbrus",
+    sourceUrl: "https://www.vedomosti.ru/business",
     sourceOutlet: "Ведомости",
   },
   {
@@ -49,7 +49,7 @@ export const DEALS: Deal[] = [
     description:
       "РФПИ совместно с пулом ближневосточных институционалов выкупает 15% «Медси» у АФК «Система». Оценка сети — около 121 млрд руб.",
     sourceTitle: "РФПИ инвестирует в крупнейшую частную сеть клиник",
-    sourceUrl: "https://www.interfax.ru/business/medsi-rdif",
+    sourceUrl: "https://www.interfax.ru/business",
     sourceOutlet: "Интерфакс",
   },
   {
@@ -66,7 +66,7 @@ export const DEALS: Deal[] = [
     description:
       "Группа «Дело» консолидирует контейнерные мощности Дальнего Востока, выкупая 100% Восточного терминала у Глобал Портс. Ожидается одобрение ФАС.",
     sourceTitle: "Группа «Дело» расширяется на Дальнем Востоке",
-    sourceUrl: "https://www.rbc.ru/business/delo-vostochny-2026",
+    sourceUrl: "https://www.rbc.ru/business/",
     sourceOutlet: "РБК",
   },
   {
@@ -83,7 +83,7 @@ export const DEALS: Deal[] = [
     description:
       "Ростех получает контрольный пакет сервисного холдинга, специализирующегося на обслуживании промышленного оборудования. Сумма не раскрывается.",
     sourceTitle: "Ростех консолидирует промышленный сервис",
-    sourceUrl: "https://tass.ru/ekonomika/rostech-almaz-2026",
+    sourceUrl: "https://tass.ru/ekonomika",
     sourceOutlet: "ТАСС",
   },
   {
@@ -100,7 +100,7 @@ export const DEALS: Deal[] = [
     description:
       "Softline консолидирует сервисное подразделение, выкупая 100% у партнёров-менеджеров. Сделка позволит развернуть единую B2B-платформу.",
     sourceTitle: "Softline объединяет сервисные активы",
-    sourceUrl: "https://www.cnews.ru/news/top/softline-service-2026",
+    sourceUrl: "https://www.cnews.ru/",
     sourceOutlet: "CNews",
   },
   {
@@ -117,7 +117,7 @@ export const DEALS: Deal[] = [
     description:
       "Т-Банк договорился о покупке 100% банка «Точка» — лидера МСБ-сегмента. Сделка требует одобрения ЦБ и ФАС, закрытие — Q3 2026.",
     sourceTitle: "Т-Банк покупает «Точку» у частных акционеров",
-    sourceUrl: "https://www.forbes.ru/finansy/tbank-tochka-2026",
+    sourceUrl: "https://www.forbes.ru/finansy",
     sourceOutlet: "Forbes Россия",
   },
   {
@@ -134,7 +134,7 @@ export const DEALS: Deal[] = [
     description:
       "Pre-IPO фонд приобрёл 4,5% «ВкусВилл» при оценке компании ~215 млрд руб. Деньги направлены на масштабирование dark stores.",
     sourceTitle: "ВкусВилл привлекает раунд перед IPO 2027",
-    sourceUrl: "https://www.kommersant.ru/doc/vkusvill-preipo",
+    sourceUrl: "https://www.kommersant.ru/rubric/3",
     sourceOutlet: "Коммерсантъ",
   },
   {
@@ -151,7 +151,7 @@ export const DEALS: Deal[] = [
     description:
       "Газпромнефть продаёт 40% дочерней Газпромнефть-Восток китайскому пулу. Сделка обеспечивает долгосрочные контракты на поставки в КНР.",
     sourceTitle: "Газпромнефть-Восток получает китайского партнёра",
-    sourceUrl: "https://www.vedomosti.ru/business/articles/gpn-vostok-china",
+    sourceUrl: "https://www.vedomosti.ru/business",
     sourceOutlet: "Ведомости",
   },
   {
@@ -168,7 +168,7 @@ export const DEALS: Deal[] = [
     description:
       "Самолёт выводит часть земельного банка в Подмосковье в ЗПИФ под управлением Дом.РФ. Сделка снижает долговую нагрузку и фиксирует прибыль.",
     sourceTitle: "Самолёт расстаётся с частью земельного банка",
-    sourceUrl: "https://www.rbc.ru/business/samolet-domrf-2026",
+    sourceUrl: "https://realty.rbc.ru/",
     sourceOutlet: "РБК Недвижимость",
   },
   {
@@ -185,7 +185,7 @@ export const DEALS: Deal[] = [
     description:
       "В рамках реструктуризации долга крупнейший молочный производитель переходит под контроль структуры РСХБ. План — финансовое оздоровление в течение 3 лет.",
     sourceTitle: "РСХБ забирает контроль над Эконивой",
-    sourceUrl: "https://www.kommersant.ru/doc/ekoniva-rshb-2026",
+    sourceUrl: "https://www.kommersant.ru/rubric/4",
     sourceOutlet: "Коммерсантъ",
   },
   {
@@ -202,7 +202,7 @@ export const DEALS: Deal[] = [
     description:
       "МТС Web Services выкупает 100% IXcellerate, удваивая мощности по сдаче стойко-мест в Московском регионе. Сделка ожидает одобрения регуляторов.",
     sourceTitle: "МТС покупает крупного оператора дата-центров",
-    sourceUrl: "https://www.cnews.ru/news/top/mts-ixcellerate-2026",
+    sourceUrl: "https://www.cnews.ru/",
     sourceOutlet: "CNews",
   },
   {
@@ -219,7 +219,7 @@ export const DEALS: Deal[] = [
     description:
       "Государственная структура входит в капитал крупного производителя жизненно необходимых препаратов. Инвестиция увязана с программой импортозамещения.",
     sourceTitle: "ВЭБ инвестирует в Фармасинтез",
-    sourceUrl: "https://www.interfax.ru/business/pharmasyntez-veb",
+    sourceUrl: "https://www.interfax.ru/business",
     sourceOutlet: "Интерфакс",
   },
   {
@@ -236,7 +236,7 @@ export const DEALS: Deal[] = [
     description:
       "СП VK и Ростелекома консолидирует одного из ведущих игроков рынка threat intelligence. Цель — создать единый национальный SOC-провайдер.",
     sourceTitle: "VK и Ростелеком купили F.A.C.C.T.",
-    sourceUrl: "https://www.cnews.ru/news/top/vk-rostelecom-facct-2026",
+    sourceUrl: "https://www.cnews.ru/",
     sourceOutlet: "CNews",
   },
   {
@@ -253,7 +253,7 @@ export const DEALS: Deal[] = [
     description:
       "Газпром энергохолдинг выкупает контрольный пакет ТГК-2 в рамках банкротных торгов. Энергетика Северо-Запада консолидируется у госхолдинга.",
     sourceTitle: "Газпром энергохолдинг забирает ТГК-2",
-    sourceUrl: "https://www.kommersant.ru/doc/geh-tgk2-2026",
+    sourceUrl: "https://www.kommersant.ru/rubric/4",
     sourceOutlet: "Коммерсантъ",
   },
   {
@@ -270,7 +270,7 @@ export const DEALS: Deal[] = [
     description:
       "Управленческий buyout с привлечением PE-фонда: команда менеджеров совместно с инвестором выкупает 75% «Готэк» у основателей.",
     sourceTitle: "«Готэк» сменит собственника",
-    sourceUrl: "https://www.vedomosti.ru/business/articles/gotek-buyout",
+    sourceUrl: "https://www.vedomosti.ru/business",
     sourceOutlet: "Ведомости",
   },
   {
@@ -287,7 +287,7 @@ export const DEALS: Deal[] = [
     description:
       "PE-подразделение ВТБ Капитал входит в ПЭК через допэмиссию. Привлечённые средства — на цифровизацию и развитие e-com фулфилмента.",
     sourceTitle: "ВТБ Капитал инвестирует в ПЭК",
-    sourceUrl: "https://www.forbes.ru/biznes/vtb-pek-2026",
+    sourceUrl: "https://www.forbes.ru/biznes",
     sourceOutlet: "Forbes Россия",
   },
   {
@@ -304,7 +304,7 @@ export const DEALS: Deal[] = [
     description:
       "Магнит выкупает долю X5 в совместном маркетплейс-проекте. После сделки актив переходит под единое управление Магнита.",
     sourceTitle: "Магнит консолидирует маркетплейс «Поиск»",
-    sourceUrl: "https://www.kommersant.ru/doc/magnit-poisk-2026",
+    sourceUrl: "https://www.kommersant.ru/rubric/3",
     sourceOutlet: "Коммерсантъ",
   },
   {
@@ -321,7 +321,7 @@ export const DEALS: Deal[] = [
     description:
       "VK увеличивает долю в Skillbox до контрольной, выкупая 25,1% у миноритариев. EdTech-направление становится самостоятельным юнитом холдинга.",
     sourceTitle: "VK увеличивает долю в Skillbox до контроля",
-    sourceUrl: "https://www.vedomosti.ru/business/articles/vk-skillbox-2026",
+    sourceUrl: "https://www.vedomosti.ru/business",
     sourceOutlet: "Ведомости",
   },
   {
@@ -338,7 +338,7 @@ export const DEALS: Deal[] = [
     description:
       "ЗПИФ под управлением Т-Банка приобретает портфель из трёх апарт-отелей в Москве и Сочи. Сделка — продолжение тренда на секьюритизацию доходной недвижимости.",
     sourceTitle: "Т-Банк нарастил портфель аренды на 14 млрд руб.",
-    sourceUrl: "https://www.rbc.ru/business/tbank-granel-2026",
+    sourceUrl: "https://realty.rbc.ru/",
     sourceOutlet: "РБК Недвижимость",
   },
 ];

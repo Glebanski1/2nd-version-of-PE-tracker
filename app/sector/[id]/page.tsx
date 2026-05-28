@@ -8,6 +8,7 @@ import { MultiplierTable } from "@/components/MultiplierTable";
 import { MultipliersChart } from "@/components/MultipliersChart";
 import { DealCard } from "@/components/DealCard";
 import { LiveFeed } from "@/components/LiveFeed";
+import { DemoBanner } from "@/components/DemoBanner";
 import { formatPct, formatRub } from "@/lib/format";
 
 export const dynamic = "force-dynamic";
@@ -33,6 +34,10 @@ export default function SectorPage({ params }: { params: { id: string } }) {
       >
         <ArrowLeft className="h-4 w-4" /> Все секторы
       </Link>
+
+      <div className="mt-4">
+        <DemoBanner />
+      </div>
 
       <section
         className="mt-4 rounded-2xl p-6 text-white shadow-soft sm:p-8"

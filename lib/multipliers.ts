@@ -24,7 +24,7 @@ export const MULTIPLIERS: Multiplier[] = [
     trendPct: 6.1,
     updatedAt: "2026-05-26",
     source: "ВТБ Капитал — Tech Equity Strategy",
-    sourceUrl: "https://www.vtbcapital.com/",
+    sourceUrl: "https://broker.vtb.ru/analitika/",
   },
   {
     sectorId: "it",
@@ -50,7 +50,7 @@ export const MULTIPLIERS: Multiplier[] = [
     trendPct: -2.3,
     updatedAt: "2026-05-25",
     source: "БКС Мир Инвестиций — Sector Note",
-    sourceUrl: "https://bcs.ru/express/analytics",
+    sourceUrl: "https://bcs-express.ru/analytics",
   },
   {
     sectorId: "retail",
@@ -62,7 +62,7 @@ export const MULTIPLIERS: Multiplier[] = [
     trendPct: 0.4,
     updatedAt: "2026-05-25",
     source: "Газпромбанк Инвестиции",
-    sourceUrl: "https://gazprombank.investments/analitika",
+    sourceUrl: "https://gazprombank.investments/",
   },
   {
     sectorId: "retail",
@@ -114,7 +114,7 @@ export const MULTIPLIERS: Multiplier[] = [
     trendPct: -3.5,
     updatedAt: "2026-05-26",
     source: "Газпромбанк — Нефть и газ",
-    sourceUrl: "https://gazprombank.investments/analitika",
+    sourceUrl: "https://gazprombank.investments/",
   },
   {
     sectorId: "energy",
@@ -126,7 +126,7 @@ export const MULTIPLIERS: Multiplier[] = [
     trendPct: -2.1,
     updatedAt: "2026-05-26",
     source: "БКС Мир Инвестиций",
-    sourceUrl: "https://bcs.ru/express/analytics",
+    sourceUrl: "https://bcs-express.ru/analytics",
   },
 
   // Real Estate
@@ -140,7 +140,7 @@ export const MULTIPLIERS: Multiplier[] = [
     trendPct: 2.7,
     updatedAt: "2026-05-24",
     source: "ДОМ.РФ Аналитика",
-    sourceUrl: "https://дом.рф/analytics/",
+    sourceUrl: "https://дом.рф/",
   },
   {
     sectorId: "realestate",
@@ -178,7 +178,7 @@ export const MULTIPLIERS: Multiplier[] = [
     trendPct: 2.4,
     updatedAt: "2026-05-26",
     source: "ВТБ Капитал — Industrials",
-    sourceUrl: "https://www.vtbcapital.com/",
+    sourceUrl: "https://broker.vtb.ru/analitika/",
   },
 
   // Pharma
@@ -218,7 +218,7 @@ export const MULTIPLIERS: Multiplier[] = [
     trendPct: 0.6,
     updatedAt: "2026-05-25",
     source: "TMT Consulting",
-    sourceUrl: "https://www.tmt-consulting.ru/",
+    sourceUrl: "https://tmt-consulting.ru/",
   },
   {
     sectorId: "telecom",
@@ -230,7 +230,7 @@ export const MULTIPLIERS: Multiplier[] = [
     trendPct: -0.3,
     updatedAt: "2026-05-25",
     source: "ВТБ Капитал — Telecom",
-    sourceUrl: "https://www.vtbcapital.com/",
+    sourceUrl: "https://broker.vtb.ru/analitika/",
   },
 
   // Agro
@@ -256,7 +256,7 @@ export const MULTIPLIERS: Multiplier[] = [
     trendPct: 4.1,
     updatedAt: "2026-05-24",
     source: "Russian Agro Outlook — Газпромбанк",
-    sourceUrl: "https://gazprombank.investments/analitika",
+    sourceUrl: "https://gazprombank.investments/",
   },
 
   // Transport
@@ -282,7 +282,7 @@ export const MULTIPLIERS: Multiplier[] = [
     trendPct: 1.8,
     updatedAt: "2026-05-25",
     source: "БКС — Transport Sector",
-    sourceUrl: "https://bcs.ru/express/analytics",
+    sourceUrl: "https://bcs-express.ru/analytics",
   },
 ];
 
