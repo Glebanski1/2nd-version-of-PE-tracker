@@ -1,9 +1,9 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { Pause, Play, RefreshCw, Radio } from "lucide-react";
 import { NewsItem, Sector } from "@/lib/types";
 import { NewsItemView } from "./NewsItem";
-import { LiveFeed } from "./LiveFeed";
 
 export function NewsFilter({
   initialItems,
@@ -12,12 +12,51 @@ export function NewsFilter({
   initialItems: NewsItem[];
   sectors: Sector[];
 }) {
+  const [items, setItems] = useState<NewsItem[]>(initialItems);
   const [activeSector, setActiveSector] = useState<string | null>(null);
   const [importance, setImportance] = useState<string>("all");
   const [query, setQuery] = useState("");
+  const [isLive, setIsLive] = useState(true);
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [newCount, setNewCount] = useState(0);
+  const sinceRef = useRef<number>(Date.now());
+  const liveIdsRef = useRef<Set<string>>(new Set());
+
+  async function tick(manual = false) {
+    if (manual) setIsRefreshing(true);
+    try {
+      const url = new URL("/api/live", window.location.origin);
+      url.searchParams.set("since", String(sinceRef.current));
+      const res = await fetch(url.toString(), { cache: "no-store" });
+      if (!res.ok) return;
+      const data = (await res.json()) as { events: NewsItem[] };
+      if (data.events.length > 0) {
+        setItems((prev) => {
+          const existing = new Set(prev.map((p) => p.id));
+          const fresh = data.events.filter((e) => !existing.has(e.id));
+          fresh.forEach((e) => liveIdsRef.current.add(e.id));
+          if (fresh.length === 0) return prev;
+          setNewCount((c) => c + fresh.length);
+          return [...fresh, ...prev].slice(0, 200);
+        });
+      }
+      sinceRef.current = Date.now();
+    } catch {
+      // ignore polling errors
+    } finally {
+      if (manual) setIsRefreshing(false);
+    }
+  }
+
+  useEffect(() => {
+    if (!isLive) return;
+    const id = setInterval(() => tick(false), 6000);
+    return () => clearInterval(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLive]);
 
   const filtered = useMemo(() => {
-    return initialItems.filter((n) => {
+    return items.filter((n) => {
       if (activeSector && !n.sectorIds.includes(activeSector as any))
         return false;
       if (importance !== "all" && n.importance !== importance) return false;
@@ -28,7 +67,7 @@ export function NewsFilter({
       }
       return true;
     });
-  }, [activeSector, importance, query, initialItems]);
+  }, [activeSector, importance, query, items]);
 
   return (
     <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
@@ -42,6 +81,14 @@ export function NewsFilter({
             placeholder="Компания, тег, источник..."
             className="w-full rounded-xl border border-ink-200 px-3 py-2 text-sm outline-none focus:border-brand-500"
           />
+          {query && (
+            <button
+              onClick={() => setQuery("")}
+              className="mt-2 text-xs text-ink-500 hover:text-ink-700"
+            >
+              Очистить
+            </button>
+          )}
         </div>
 
         <div className="card p-4">
@@ -80,10 +127,10 @@ export function NewsFilter({
               }`}
             >
               <span>Все секторы</span>
-              <span className="text-xs text-ink-500">{initialItems.length}</span>
+              <span className="text-xs text-ink-500">{items.length}</span>
             </button>
             {sectors.map((s) => {
-              const count = initialItems.filter((n) =>
+              const count = items.filter((n) =>
                 n.sectorIds.includes(s.id),
               ).length;
               return (
@@ -112,15 +159,85 @@ export function NewsFilter({
       </aside>
 
       <div className="lg:col-span-2">
-        <LiveFeed
-          initialItems={filtered}
-          sectorId={activeSector ?? undefined}
-        />
-        {filtered.length === 0 && (
-          <div className="card mt-3 p-6 text-center text-sm text-ink-500">
-            По выбранным фильтрам ничего не найдено.
+        <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+          <div className="flex items-center gap-2">
+            <Radio className="h-4 w-4 text-emerald-600" />
+            {isLive ? (
+              <span className="badge border-emerald-200 bg-emerald-50 text-emerald-700">
+                <span className="live-dot" /> LIVE
+              </span>
+            ) : (
+              <span className="badge border-ink-200 bg-ink-50 text-ink-700">
+                Пауза
+              </span>
+            )}
+            <span className="text-sm text-ink-700">
+              Показано{" "}
+              <span className="font-semibold text-ink-900">{filtered.length}</span>{" "}
+              из{" "}
+              <span className="font-semibold text-ink-900">{items.length}</span>
+            </span>
+            {newCount > 0 ? (
+              <span className="badge border-brand-200 bg-brand-50 text-brand-700">
+                +{newCount} новых
+              </span>
+            ) : null}
           </div>
-        )}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => tick(true)}
+              className="btn-ghost text-xs"
+              disabled={isRefreshing}
+            >
+              <RefreshCw
+                className={`h-3.5 w-3.5 ${isRefreshing ? "animate-spin" : ""}`}
+              />
+              Обновить
+            </button>
+            <button
+              onClick={() => setIsLive((v) => !v)}
+              className="btn-ghost text-xs"
+            >
+              {isLive ? (
+                <>
+                  <Pause className="h-3.5 w-3.5" /> Пауза
+                </>
+              ) : (
+                <>
+                  <Play className="h-3.5 w-3.5" /> Старт
+                </>
+              )}
+            </button>
+          </div>
+        </div>
+
+        <div className="space-y-3">
+          {filtered.length === 0 ? (
+            <div className="card p-6 text-center text-sm text-ink-500">
+              По выбранным фильтрам ничего не найдено.
+              {(activeSector || importance !== "all" || query.trim()) && (
+                <button
+                  onClick={() => {
+                    setActiveSector(null);
+                    setImportance("all");
+                    setQuery("");
+                  }}
+                  className="ml-2 link"
+                >
+                  Сбросить фильтры
+                </button>
+              )}
+            </div>
+          ) : (
+            filtered.map((item) => (
+              <NewsItemView
+                key={item.id}
+                item={item}
+                isLive={liveIdsRef.current.has(item.id)}
+              />
+            ))
+          )}
+        </div>
       </div>
     </div>
   );

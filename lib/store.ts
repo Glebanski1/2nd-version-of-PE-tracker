@@ -3,6 +3,7 @@ import { MULTIPLIERS, getMultipliersBySector } from "./multipliers";
 import { NEWS } from "./news";
 import { SECTORS, getSectorById } from "./sectors";
 import { getAggregated, getLiveSince } from "./aggregator";
+import { fetchDealsFromSheets } from "./sources/sheets";
 import {
   Deal,
   MarketOverview,
@@ -74,6 +75,16 @@ export function getMarketOverview(): MarketOverview {
   };
 }
 
+export async function getDealsFromSheets(limit = 80): Promise<Deal[]> {
+  const deals = await fetchDealsFromSheets();
+  return deals.slice(0, limit);
+}
+
+export async function getDealsBySectorFromSheets(sectorId: string): Promise<Deal[]> {
+  const deals = await fetchDealsFromSheets();
+  return deals.filter((d) => d.sectorId === sectorId);
+}
+
 export async function getSectorSnapshot(
   sectorId: string,
 ): Promise<SectorSnapshot | null> {
@@ -82,7 +93,7 @@ export async function getSectorSnapshot(
   return {
     sector,
     multipliers: getMultipliersBySector(sectorId),
-    deals: getDealsBySector(sectorId),
+    deals: await getDealsBySectorFromSheets(sectorId),
     news: await getNewsBySector(sectorId),
   };
 }
